@@ -14,6 +14,7 @@ namespace ncEdit
     public partial class Form1 : Form
     {
         private string filetext = string.Empty;
+        private string tempText = string.Empty;
         public Form1()
         {
             InitializeComponent();
@@ -38,8 +39,12 @@ namespace ncEdit
         private void btn_ConvertNC_Click(object sender, EventArgs e)
         {
             string convertText = filetext;
-            convertText.Replace("G90 G92X120.0787Y60.2362Z7.874", "G00G92X120.8661Y61.024Z3.937");
-            converted_code.Text = convertText;
+            convertText.Replace("G90 G92X120.0787Y60.2362Z7.874", "hey");
+            File.WriteAllText("temp.nc", convertText);
+            tempText = File.ReadAllText("temp.nc");
+            converted_code.Text = tempText;
+
+
         }
     }
 }
