@@ -1,0 +1,4 @@
+﻿Open both the input file and a new output file (as a TextReader/TextWriter, e.g. with File.OpenText and File.CreateText)
+Read a line (TextReader.ReadLine) - if you don't want to delete it, write it to the output file (TextWriter.WriteLine)
+When you've read all the lines, close both the reader and the writer (if you use using statements for both, this will happen automatically)
+If you want to replace the input with the output, delete the input file and then move the output file into place.

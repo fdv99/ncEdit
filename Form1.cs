@@ -38,10 +38,10 @@ namespace ncEdit
 
         private void btn_ConvertNC_Click(object sender, EventArgs e)
         {
-            string convertText = filetext;
-            convertText.Replace("G90 G92X120.0787Y60.2362Z7.874", "hey");
-            File.WriteAllText("temp.nc", convertText);
-            tempText = File.ReadAllText("temp.nc");
+            //string convertText = filetext;
+            filetext.Replace("E10", "hey");
+            File.WriteAllText(@"C:\Users\V6-Engineering\Desktop\temp.nc", filetext);
+            tempText = File.ReadAllText(@"C:\Users\V6-Engineering\Desktop\temp.nc");
             converted_code.Text = tempText;
 
 
