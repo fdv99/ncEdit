@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ncEdit", "ncEdit.csproj", "{A4F2F17C-04B4-41A9-865F-8019D0569CEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A4F2F17C-04B4-41A9-865F-8019D0569CEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4F2F17C-04B4-41A9-865F-8019D0569CEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4F2F17C-04B4-41A9-865F-8019D0569CEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4F2F17C-04B4-41A9-865F-8019D0569CEB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E603E9BE-9580-4B5B-AE91-B48F03DDF176}
+	EndGlobalSection
+EndGlobal
