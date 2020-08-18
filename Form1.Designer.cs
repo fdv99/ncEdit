@@ -59,6 +59,7 @@
             this.btn_ConvertNC.TabIndex = 1;
             this.btn_ConvertNC.Text = "Convert NC";
             this.btn_ConvertNC.UseVisualStyleBackColor = true;
+            this.btn_ConvertNC.Click += new System.EventHandler(this.btn_ConvertNC_Click);
             // 
             // ck_ShuttleTable
             // 
