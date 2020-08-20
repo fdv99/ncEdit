@@ -9,24 +9,24 @@ using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace ncEdit
 {
     public partial class Form1 : Form
     {
 
-        private List<string> fileList = new List<string>();
         private string ncFileName = string.Empty;
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void btn_OpenFile_Click(object sender, EventArgs e)
+        private void Btn_OpenFile_Click(object sender, EventArgs e)
         {
             Stream myStream;
 
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            var openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "nc files (*.nc)|*.nc|All files (*.*)|*.*";
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -38,19 +38,36 @@ namespace ncEdit
             }
         }
 
-        private void btn_ConvertNC_Click(object sender, EventArgs e)
+        private void Btn_ConvertNC_Click(object sender, EventArgs e)
         {
 
             List<string> convertList = File.ReadAllLines(ncFileName).ToList();  //converts original code to List
             int convertLength = convertList.Count;  //gets number of items in List
             convertList.RemoveAt(convertLength - 1);  //deletes last row of list (%)
             convertList.RemoveAt(convertLength - 2);  //deletes second last row of list (G50)
-            convertList.Add("G00X120.8661Y61.0236Z3.937");  //append go home on end of list
-            convertList.Add("M707");  //append shuttle command on end
-            convertList.Add("G50");  //append G50 on end
+            convertList[1] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
+            //convertList.Insert(5, "M100");  //insert laser on command before E10
+
+            if (convertList[5] == "E10")
+            {
+                convertList.Insert(5, "M100");
+            }
+
+            if (ck_ShuttleTable.Checked)
+            {
+                convertList.Add("G00X120.8661Y61.0236Z3.937");  //append go home on end of list
+                convertList.Add("M707");  //append shuttle command on end
+                convertList.Add("G50");  //append G50 on end
+            }
+            else
+            {
+                convertList.Add("G50");  //append G50 on end
+            }
+
+            
             converted_code.Lines = convertList.ToArray();  //display new code in text box
 
-            string AddSuffix(string filename, string suffix)
+            string AddSuffix(string ncFileName, string suffix)
             {
                 string fDir = Path.GetDirectoryName(ncFileName);
                 string fName = Path.GetFileNameWithoutExtension(ncFileName);
@@ -60,8 +77,11 @@ namespace ncEdit
 
             string newFileName = AddSuffix(ncFileName, String.Format("({0})", "F1")); //append (F1) to file name
 
-            converted_code.SaveFile(newFileName, RichTextBoxStreamType.RichText);  //save new file
+            TextWriter tw = new StreamWriter(newFileName);
 
+            foreach (String s in convertList)
+                tw.WriteLine(s);
+            tw.Close();
 
 
         }
