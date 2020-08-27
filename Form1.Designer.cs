@@ -79,7 +79,7 @@
             this.original_code.ForeColor = System.Drawing.Color.White;
             this.original_code.Location = new System.Drawing.Point(0, 0);
             this.original_code.Name = "original_code";
-            this.original_code.Size = new System.Drawing.Size(321, 390);
+            this.original_code.Size = new System.Drawing.Size(295, 390);
             this.original_code.TabIndex = 4;
             this.original_code.Text = "";
             // 
@@ -91,7 +91,7 @@
             this.converted_code.ForeColor = System.Drawing.Color.White;
             this.converted_code.Location = new System.Drawing.Point(0, 0);
             this.converted_code.Name = "converted_code";
-            this.converted_code.Size = new System.Drawing.Size(319, 390);
+            this.converted_code.Size = new System.Drawing.Size(293, 390);
             this.converted_code.TabIndex = 5;
             this.converted_code.Text = "";
             // 
@@ -130,8 +130,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.converted_code);
-            this.splitContainer1.Size = new System.Drawing.Size(644, 390);
-            this.splitContainer1.SplitterDistance = 321;
+            this.splitContainer1.Size = new System.Drawing.Size(592, 390);
+            this.splitContainer1.SplitterDistance = 295;
             this.splitContainer1.TabIndex = 8;
             // 
             // splitContainer2
@@ -147,8 +147,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.label2);
-            this.splitContainer2.Size = new System.Drawing.Size(644, 30);
-            this.splitContainer2.SplitterDistance = 322;
+            this.splitContainer2.Size = new System.Drawing.Size(592, 30);
+            this.splitContainer2.SplitterDistance = 296;
             this.splitContainer2.TabIndex = 9;
             // 
             // panel1
@@ -158,21 +158,21 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(644, 70);
+            this.panel1.Size = new System.Drawing.Size(592, 70);
             this.panel1.TabIndex = 10;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 490);
+            this.ClientSize = new System.Drawing.Size(592, 490);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitContainer2);
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(608, 529);
             this.Name = "Form1";
-            this.Text = "V6 NC Conversion";
+            this.Text = "   V6 NC Conversion";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
