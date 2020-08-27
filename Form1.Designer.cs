@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Btn_OpenFile = new System.Windows.Forms.Button();
             this.Btn_ConvertNC = new System.Windows.Forms.Button();
-            this.ck_ShuttleTable = new System.Windows.Forms.CheckBox();
             this.original_code = new System.Windows.Forms.RichTextBox();
             this.converted_code = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -66,21 +65,11 @@
             this.Btn_ConvertNC.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_ConvertNC.Location = new System.Drawing.Point(106, 12);
             this.Btn_ConvertNC.Name = "Btn_ConvertNC";
-            this.Btn_ConvertNC.Size = new System.Drawing.Size(96, 23);
+            this.Btn_ConvertNC.Size = new System.Drawing.Size(114, 23);
             this.Btn_ConvertNC.TabIndex = 1;
-            this.Btn_ConvertNC.Text = "Convert NC";
+            this.Btn_ConvertNC.Text = "Convert to F1";
             this.Btn_ConvertNC.UseVisualStyleBackColor = true;
             this.Btn_ConvertNC.Click += new System.EventHandler(this.Btn_ConvertNC_Click);
-            // 
-            // ck_ShuttleTable
-            // 
-            this.ck_ShuttleTable.AutoSize = true;
-            this.ck_ShuttleTable.Location = new System.Drawing.Point(12, 41);
-            this.ck_ShuttleTable.Name = "ck_ShuttleTable";
-            this.ck_ShuttleTable.Size = new System.Drawing.Size(92, 17);
-            this.ck_ShuttleTable.TabIndex = 2;
-            this.ck_ShuttleTable.Text = "Pallet Change";
-            this.ck_ShuttleTable.UseVisualStyleBackColor = true;
             // 
             // original_code
             // 
@@ -166,7 +155,6 @@
             // 
             this.panel1.Controls.Add(this.Btn_OpenFile);
             this.panel1.Controls.Add(this.Btn_ConvertNC);
-            this.panel1.Controls.Add(this.ck_ShuttleTable);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -196,7 +184,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -205,7 +192,6 @@
 
         private System.Windows.Forms.Button Btn_OpenFile;
         private System.Windows.Forms.Button Btn_ConvertNC;
-        private System.Windows.Forms.CheckBox ck_ShuttleTable;
         private System.Windows.Forms.RichTextBox original_code;
         private System.Windows.Forms.RichTextBox converted_code;
         private System.Windows.Forms.Label label1;
