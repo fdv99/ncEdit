@@ -24,13 +24,12 @@ namespace ncEdit
 
         private void Btn_OpenFile_Click(object sender, EventArgs e)
         {
-            Stream myStream;
 
             var openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Filter = "nc files (*.nc)|*.nc|All files (*.*)|*.*";
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if ((myStream = openFileDialog1.OpenFile()) !=null)
+                if ((openFileDialog1.OpenFile()) !=null)
                 {
                     ncFileName = openFileDialog1.FileName;  //saves file path
                     original_code.Text = File.ReadAllText(ncFileName);  //displays original code in Text box
@@ -48,15 +47,13 @@ namespace ncEdit
             convertList[1] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
             //convertList.Insert(5, "M100");  //insert laser on command before E10
 
-            if (convertList[5] == "E10")
-            {
-                convertList.Insert(5, "M100");
-            }
+            convertList.Insert(2, "M100"); //Adds M100 laser on command after origin is set and befor offsets
+            convertList.Insert(1, "(WK/   120.000X  60.000)");
 
             if (ck_ShuttleTable.Checked)
             {
-                convertList.Add("G00X120.8661Y61.0236Z3.937");  //append go home on end of list
-                convertList.Add("M707");  //append shuttle command on end
+                convertList.Add("/G00X120.8661Y61.0236Z3.937");  //append go home on end of list
+                convertList.Add("/M707");  //append shuttle command on end
                 convertList.Add("G50");  //append G50 on end
             }
             else
