@@ -38,6 +38,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tb_fileSize = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -146,6 +147,7 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.tb_fileSize);
             this.splitContainer2.Panel2.Controls.Add(this.label2);
             this.splitContainer2.Size = new System.Drawing.Size(592, 38);
             this.splitContainer2.SplitterDistance = 296;
@@ -161,6 +163,13 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(606, 59);
             this.panel1.TabIndex = 10;
+            // 
+            // tb_fileSize
+            // 
+            this.tb_fileSize.Location = new System.Drawing.Point(180, 7);
+            this.tb_fileSize.Name = "tb_fileSize";
+            this.tb_fileSize.Size = new System.Drawing.Size(100, 20);
+            this.tb_fileSize.TabIndex = 8;
             // 
             // Form1
             // 
@@ -200,6 +209,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox tb_fileSize;
     }
 }
 

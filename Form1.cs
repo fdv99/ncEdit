@@ -73,7 +73,8 @@ namespace ncEdit
             foreach (String s in convertList)
                 tw.WriteLine(s);
             tw.Close();
-
+            int fileSize = newFileName.Length;
+            tb_fileSize.Text = fileSize.ToString();
 
         }
     }
