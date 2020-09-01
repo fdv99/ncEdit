@@ -46,23 +46,16 @@ namespace ncEdit
             convertList.RemoveAt(convertLength - 1);  //deletes last row of list (%)
             convertList.RemoveAt(convertLength - 2);  //deletes second last row of list (G50)
             convertList[1] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
-            //convertList.Insert(5, "M100");  //insert laser on command before E10
+            convertList.Remove("M100");  //its in the wrong spot, need to move up and only call once
 
-            if (convertList[5] == "E10")
-            {
-                convertList.Insert(5, "M100");
-            }
+            convertList.Insert(5, "M100");
 
-            if (ck_ShuttleTable.Checked)
-            {
-                convertList.Add("G00X120.8661Y61.0236Z3.937");  //append go home on end of list
-                convertList.Add("M707");  //append shuttle command on end
-                convertList.Add("G50");  //append G50 on end
-            }
-            else
-            {
-                convertList.Add("G50");  //append G50 on end
-            }
+            convertList.Add("G130"); //returns axis to home
+            convertList.Add("G93X0.0Y0.0Z0.0");  //Cancel the offset so machine can be sent home
+            convertList.Add("/G00X120.8661Y61.0236Z3.937");  //append go home on end of list
+            convertList.Add("/M707");  //append shuttle command on end
+            convertList.Add("G50");  //append G50 on end
+
 
             
             converted_code.Lines = convertList.ToArray();  //display new code in text box
