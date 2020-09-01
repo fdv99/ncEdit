@@ -44,12 +44,15 @@ namespace ncEdit
             int convertLength = convertList.Count;  //gets number of items in List
             convertList.RemoveAt(convertLength - 1);  //deletes last row of list (%)
             convertList.RemoveAt(convertLength - 2);  //deletes second last row of list (G50)
+            //convertList.Remove("M100"); // remove M100 everywhere so it is only called once at the beginning
+
+
             convertList[1] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
 
             convertList.Insert(2, "M100"); //Adds M100 laser on command after origin is set and befor offsets
             convertList.Insert(1, "(WK/   120.000X  60.000)");
 
-
+            convertList.Add("G93 X0.0Y0.0Z0.0");
             convertList.Add("/G00X120.8661Y61.0236Z3.937");  //append go home on end of list
             convertList.Add("/M707");  //append shuttle command on end
             convertList.Add("G50");  //append G50 on end
@@ -65,7 +68,7 @@ namespace ncEdit
                 return Path.Combine(fDir, String.Concat(fName, suffix, fExt));
             }
 
-            string newFileName = AddSuffix(ncFileName, String.Format("({0})", "F1")); //append (F1) to file name
+            string newFileName = AddSuffix(ncFileName, String.Format("{0}", "F1")); //append (F1) to file name
 
             TextWriter tw = new StreamWriter(newFileName);
 
