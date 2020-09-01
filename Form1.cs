@@ -53,7 +53,7 @@ namespace ncEdit
             convertList.Insert(1, "(WK/   120.000X  60.000)");
 
             convertList.Add("G93 X0.0Y0.0Z0.0");
-            convertList.Add("/G00X120.8661Y61.0236Z3.937");  //append go home on end of list
+            convertList.Add("/G130");  //append go home on end of list
             convertList.Add("/M707");  //append shuttle command on end
             convertList.Add("G50");  //append G50 on end
 
