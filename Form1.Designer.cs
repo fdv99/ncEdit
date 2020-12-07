@@ -37,8 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.tb_fileSize = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -153,6 +153,13 @@
             this.splitContainer2.SplitterDistance = 296;
             this.splitContainer2.TabIndex = 9;
             // 
+            // tb_fileSize
+            // 
+            this.tb_fileSize.Location = new System.Drawing.Point(180, 7);
+            this.tb_fileSize.Name = "tb_fileSize";
+            this.tb_fileSize.Size = new System.Drawing.Size(100, 20);
+            this.tb_fileSize.TabIndex = 8;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.Btn_OpenFile);
@@ -163,13 +170,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(606, 59);
             this.panel1.TabIndex = 10;
-            // 
-            // tb_fileSize
-            // 
-            this.tb_fileSize.Location = new System.Drawing.Point(180, 7);
-            this.tb_fileSize.Name = "tb_fileSize";
-            this.tb_fileSize.Size = new System.Drawing.Size(100, 20);
-            this.tb_fileSize.TabIndex = 8;
             // 
             // Form1
             // 

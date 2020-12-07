@@ -44,11 +44,19 @@ namespace ncEdit
             int convertLength = convertList.Count;  //gets number of items in List
             convertList.RemoveAt(convertLength - 1);  //deletes last row of list (%)
             convertList.RemoveAt(convertLength - 2);  //deletes second last row of list (G50)
+            var material = convertList[3];  // save material line
+            convertList.RemoveAt(3); // remove material line
+            convertList.RemoveAt(1);  // remove coordinate line
             convertList.Remove("M100"); // remove M100 everywhere so it is only called once at the beginning
 
-            convertList[1] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
-            convertList.Insert(2, "M100"); //Adds M100 laser on command after origin is set and befor offsets
-            //convertList.Insert(1, "(WK/   120.000X  60.000)");
+            if (convertList.Contains("M100"))
+            {
+                convertList.Remove("M100");
+            }
+
+            convertList.Insert(1, material);  // insert material in beginning
+            convertList[2] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
+            convertList.Insert(3, "M100"); //Adds M100 laser on command after origin is set and befor offsets
 
             convertList.Add("G93 X0.0Y0.0Z0.0");
             convertList.Add("/G130");  //append go home on end of list
