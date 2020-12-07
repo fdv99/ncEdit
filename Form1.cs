@@ -62,7 +62,6 @@ namespace ncEdit
             convertList.Add("/G130");  //append go home on end of list
             convertList.Add("/M707");  //append shuttle command on end
             convertList.Add("G50");  //append G50 on end
-
             
             converted_code.Lines = convertList.ToArray();  //display new code in text box
 
