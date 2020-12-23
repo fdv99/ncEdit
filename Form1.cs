@@ -48,8 +48,8 @@ namespace ncEdit
             convertList.RemoveAt(3); // remove material line
             convertList.RemoveAt(1);  // remove coordinate line
             convertList.Remove("M100"); // remove M100 everywhere so it is only called once at the beginning
-
-            if (convertList.Contains("M100"))
+            
+            while (convertList.Contains("M100"))
             {
                 convertList.Remove("M100");
             }
