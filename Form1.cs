@@ -34,11 +34,15 @@ namespace ncEdit
         {
 
             List<string> convertList = File.ReadAllLines(ncFileName).ToList();  //converts original code to List
+
+            var materialLocation = convertList.FindIndex(str => str.Contains("M102"));
+            var material = convertList[materialLocation];
+
             int convertLength = convertList.Count;  //gets number of items in List
             convertList.RemoveAt(convertLength - 1);  //deletes last row of list (%)
             convertList.RemoveAt(convertLength - 2);  //deletes second last row of list (G50)
-            var material = convertList[3];  // save material line
-            convertList.RemoveAt(3); // remove material line
+            //var material = convertList[3];  // save material line
+            // convertList.RemoveAt(3); // remove material line
             convertList.RemoveAt(1);  // remove coordinate line
             convertList.Remove("M100"); // remove M100 everywhere so it is only called once at the beginning
 
