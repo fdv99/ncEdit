@@ -34,15 +34,17 @@ namespace ncEdit
         {
 
             List<string> convertList = File.ReadAllLines(ncFileName).ToList();  //converts original code to List
-
+            var material = "";
             var materialLocation = convertList.FindIndex(str => str.Contains("M102"));
-            var material = convertList[materialLocation];
+            if (materialLocation != -1)
+            {
+                material = convertList[materialLocation];
+            }
+            
 
             int convertLength = convertList.Count;  //gets number of items in List
             convertList.RemoveAt(convertLength - 1);  //deletes last row of list (%)
             convertList.RemoveAt(convertLength - 2);  //deletes second last row of list (G50)
-            //var material = convertList[3];  // save material line
-            // convertList.RemoveAt(3); // remove material line
             convertList.RemoveAt(1);  // remove coordinate line
             convertList.Remove("M100"); // remove M100 everywhere so it is only called once at the beginning
             
@@ -51,7 +53,12 @@ namespace ncEdit
                 convertList.Remove("M100");
             }
 
-            convertList.Insert(1, material);  // insert material in beginning
+            if (material != "")
+            {
+                convertList.Insert(1, material);  // insert material in beginning
+            }
+
+
             convertList[2] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
             convertList.Insert(3, "M100"); //Adds M100 laser on command after origin is set and befor offsets
 
