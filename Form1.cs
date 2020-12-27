@@ -32,27 +32,28 @@ namespace ncEdit
 
         private void Btn_ConvertNC_Click(object sender, EventArgs e)
         {
-
             List<string> convertList = File.ReadAllLines(ncFileName).ToList();  //converts original code to List
+
+            /// Get material condition if it is there
             var material = "";
             var materialLocation = convertList.FindIndex(str => str.Contains("M102"));
             if (materialLocation != -1)
             {
                 material = convertList[materialLocation];
             }
-            
 
             int convertLength = convertList.Count;  //gets number of items in List
             convertList.RemoveAt(convertLength - 1);  //deletes last row of list (%)
             convertList.RemoveAt(convertLength - 2);  //deletes second last row of list (G50)
             convertList.RemoveAt(1);  // remove coordinate line
-            convertList.Remove("M100"); // remove M100 everywhere so it is only called once at the beginning
             
+            /// Remove M100 everywhere it might be
             while (convertList.Contains("M100"))
             {
                 convertList.Remove("M100");
             }
 
+            /// If there is a material designation, insert it into the begining
             if (material != "")
             {
                 convertList.Insert(1, material);  // insert material in beginning
