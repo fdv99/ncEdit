@@ -205,6 +205,7 @@
             this.txtBoxYOffset.Name = "txtBoxYOffset";
             this.txtBoxYOffset.Size = new System.Drawing.Size(100, 20);
             this.txtBoxYOffset.TabIndex = 4;
+            this.txtBoxYOffset.Text = "1.0";
             // 
             // txtBoxXOffset
             // 
@@ -212,6 +213,7 @@
             this.txtBoxXOffset.Name = "txtBoxXOffset";
             this.txtBoxXOffset.Size = new System.Drawing.Size(100, 20);
             this.txtBoxXOffset.TabIndex = 3;
+            this.txtBoxXOffset.Text = "0.0";
             // 
             // chkOffset
             // 

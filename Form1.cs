@@ -10,6 +10,12 @@ namespace ncEdit
     {
 
         private string ncFileName = string.Empty;
+        List<string> convertList = new List<string>();
+        string material = "";
+        double xOffset = 0.0;
+        double yOffset = 0.0;
+        string materialSize = "";
+
         public Form1()
         {
             InitializeComponent();
@@ -26,26 +32,36 @@ namespace ncEdit
                 {
                     ncFileName = openFileDialog1.FileName;  //saves file path
                     original_code.Text = File.ReadAllText(ncFileName);  //displays original code in Text box
+                    convertList = File.ReadAllLines(ncFileName).ToList();
                 }
             }
         }
 
-        private void Btn_ConvertNC_Click(object sender, EventArgs e)
-        {
-            List<string> convertList = File.ReadAllLines(ncFileName).ToList();  //converts original code to List
 
+        public string GetMaterial()
+        {
             /// Get material condition if it is there
-            var material = "";
+
             var materialLocation = convertList.FindIndex(str => str.Contains("M102"));
             if (materialLocation != -1)
             {
                 material = convertList[materialLocation];
+                convertList.RemoveAt(materialLocation);
             }
 
+            return material;
+        }
+        private void Btn_ConvertNC_Click(object sender, EventArgs e)
+        {
+            var offsetLocation = convertList.FindIndex(str => str.Contains("G93"));
+            convertList.RemoveAt(offsetLocation);
+
+            GetMaterial();
             int convertLength = convertList.Count;  //gets number of items in List
             convertList.RemoveAt(convertLength - 1);  //deletes last row of list (%)
             convertList.RemoveAt(convertLength - 2);  //deletes second last row of list (G50)
             convertList.RemoveAt(1);  // remove coordinate line
+
             
             /// Remove M100 everywhere it might be
             while (convertList.Contains("M100"))
@@ -89,9 +105,22 @@ namespace ncEdit
             tw.Close();
             int fileSize = newFileName.Length;
             tb_fileSize.Text = fileSize.ToString();
+            MaterialSize();
 
         }
 
-        private void MaterialSize();
+        private string MaterialSize()
+        {
+            double xMax = 0.0;
+            double yMax = 0.0;
+            List<string> xList = new List<string>();
+
+            foreach (string item in convertList)
+            {
+
+                Console.WriteLine(item.Split('X')); 
+            }
+            return materialSize;
+        }
     }
 }
