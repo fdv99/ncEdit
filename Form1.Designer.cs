@@ -39,11 +39,11 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tb_fileSize = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.chkOffset = new System.Windows.Forms.CheckBox();
-            this.txtBoxXOffset = new System.Windows.Forms.TextBox();
-            this.txtBoxYOffset = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtBoxYOffset = new System.Windows.Forms.TextBox();
+            this.txtBoxXOffset = new System.Windows.Forms.TextBox();
+            this.chkOffset = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -181,29 +181,14 @@
             this.panel1.Size = new System.Drawing.Size(606, 60);
             this.panel1.TabIndex = 10;
             // 
-            // chkOffset
+            // label4
             // 
-            this.chkOffset.AutoSize = true;
-            this.chkOffset.Location = new System.Drawing.Point(259, 12);
-            this.chkOffset.Name = "chkOffset";
-            this.chkOffset.Size = new System.Drawing.Size(92, 17);
-            this.chkOffset.TabIndex = 2;
-            this.chkOffset.Text = "Include Offset";
-            this.chkOffset.UseVisualStyleBackColor = true;
-            // 
-            // txtBoxXOffset
-            // 
-            this.txtBoxXOffset.Location = new System.Drawing.Point(480, 12);
-            this.txtBoxXOffset.Name = "txtBoxXOffset";
-            this.txtBoxXOffset.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxXOffset.TabIndex = 3;
-            // 
-            // txtBoxYOffset
-            // 
-            this.txtBoxYOffset.Location = new System.Drawing.Point(480, 33);
-            this.txtBoxYOffset.Name = "txtBoxYOffset";
-            this.txtBoxYOffset.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxYOffset.TabIndex = 4;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(429, 36);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(45, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Y Offset";
             // 
             // label3
             // 
@@ -214,14 +199,29 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "X Offset";
             // 
-            // label4
+            // txtBoxYOffset
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(429, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Y Offset";
+            this.txtBoxYOffset.Location = new System.Drawing.Point(480, 33);
+            this.txtBoxYOffset.Name = "txtBoxYOffset";
+            this.txtBoxYOffset.Size = new System.Drawing.Size(100, 20);
+            this.txtBoxYOffset.TabIndex = 4;
+            // 
+            // txtBoxXOffset
+            // 
+            this.txtBoxXOffset.Location = new System.Drawing.Point(480, 12);
+            this.txtBoxXOffset.Name = "txtBoxXOffset";
+            this.txtBoxXOffset.Size = new System.Drawing.Size(100, 20);
+            this.txtBoxXOffset.TabIndex = 3;
+            // 
+            // chkOffset
+            // 
+            this.chkOffset.AutoSize = true;
+            this.chkOffset.Location = new System.Drawing.Point(259, 12);
+            this.chkOffset.Name = "chkOffset";
+            this.chkOffset.Size = new System.Drawing.Size(92, 17);
+            this.chkOffset.TabIndex = 2;
+            this.chkOffset.Text = "Include Offset";
+            this.chkOffset.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

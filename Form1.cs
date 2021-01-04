@@ -91,5 +91,7 @@ namespace ncEdit
             tb_fileSize.Text = fileSize.ToString();
 
         }
+
+        private void MaterialSize();
     }
 }
