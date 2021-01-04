@@ -74,7 +74,7 @@ namespace ncEdit
             {
                 convertList.Insert(1, material);  // insert material in beginning
             }
-
+            MaterialSize();
 
             convertList[2] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
             convertList.Insert(3, "M100"); //Adds M100 laser on command after origin is set and befor offsets
@@ -105,7 +105,6 @@ namespace ncEdit
             tw.Close();
             int fileSize = newFileName.Length;
             tb_fileSize.Text = fileSize.ToString();
-            MaterialSize();
 
         }
 
@@ -114,11 +113,25 @@ namespace ncEdit
             double xMax = 0.0;
             double yMax = 0.0;
             List<string> xList = new List<string>();
+            string xValue = "";
+            string yValue = "";
 
             foreach (string item in convertList)
             {
+                if (item.IndexOf('X') != -1)
+                {
+                    int startX = item.IndexOf('X');
+                    startX = startX + 1;
+                    xValue = item.Substring(startX, 5);
+                }
+                if (item.IndexOf('Y') != -1)
+                {
+                    int startY = item.IndexOf('Y');
+                    startY = startY + 1;
+                    xValue = item.Substring(startY, 5);
+                }
 
-                Console.WriteLine(item.Split('X')); 
+                Console.WriteLine($"{xValue}, {yValue}"); 
             }
             return materialSize;
         }
