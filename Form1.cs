@@ -24,8 +24,10 @@ namespace ncEdit
         private void Btn_OpenFile_Click(object sender, EventArgs e)
         {
 
-            var openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "nc files (*.nc)|*.nc|All files (*.*)|*.*";
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                Filter = "nc files (*.nc)|*.nc|All files (*.*)|*.*"
+            };
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 if ((openFileDialog1.OpenFile()) !=null)
@@ -88,7 +90,7 @@ namespace ncEdit
             convertList[3] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
             convertList.Insert(4, "M100"); //Adds M100 laser on command after origin is set and befor offsets
 
-            convertList.Insert(5,$"G93 X{xOffset.ToString("0.0###")}Y{yOffset.ToString("0.0###")}");
+            convertList.Insert(5, $"G93 X{xOffset:0.0###}Y{yOffset:0.0###}");
             convertList.Add("/G130");  //append go home on end of list
             convertList.Add("/M707");  //append shuttle command on end
             convertList.Add("G50");  //append G50 on end
@@ -148,8 +150,8 @@ namespace ncEdit
                     }
                 }
             }
-            Console.WriteLine($"X{xMax.ToString()} Y{yValue.ToString()}");
-            materialSize = $"(WK/   0.000T {xMax.ToString()}X  {yValue.ToString()})";
+            Console.WriteLine($"X{xMax} Y{yValue}");
+            materialSize = $"(WK/   0.000T {xMax}X  {yValue})";
             convertList.Insert(1, materialSize);
         }
     }
