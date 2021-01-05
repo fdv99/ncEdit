@@ -51,23 +51,30 @@ namespace ncEdit
 
             return material;
         }
-        private void Btn_ConvertNC_Click(object sender, EventArgs e)
+
+        private void RemoveItems()
         {
             var offsetLocation = convertList.FindIndex(str => str.Contains("G93"));
             convertList.RemoveAt(offsetLocation);
 
-            GetMaterial();
             int convertLength = convertList.Count;  //gets number of items in List
-            convertList.RemoveAt(convertLength - 1);  //deletes last row of list (%)
-            convertList.RemoveAt(convertLength - 2);  //deletes second last row of list (G50)
+            convertList.RemoveAt(convertList.Count - 1);  //deletes last row of list (%)
+            convertList.RemoveAt(convertList.Count - 1);  //deletes second last row of list (G50)
             convertList.RemoveAt(1);  // remove coordinate line
 
-            
             /// Remove M100 everywhere it might be
             while (convertList.Contains("M100"))
             {
                 convertList.Remove("M100");
             }
+        }
+
+        private void Btn_ConvertNC_Click(object sender, EventArgs e)
+        {
+            GetMaterial();
+            RemoveItems();
+            Double.TryParse(txtBoxXOffset.Text, out xOffset);
+            Double.TryParse(txtBoxYOffset.Text, out yOffset);
 
             /// If there is a material designation, insert it into the begining
             if (material != "")
