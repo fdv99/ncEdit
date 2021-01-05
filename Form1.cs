@@ -75,6 +75,7 @@ namespace ncEdit
             RemoveItems();
             Double.TryParse(txtBoxXOffset.Text, out xOffset);
             Double.TryParse(txtBoxYOffset.Text, out yOffset);
+            
 
             /// If there is a material designation, insert it into the begining
             if (material != "")
@@ -86,7 +87,7 @@ namespace ncEdit
             convertList[2] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
             convertList.Insert(3, "M100"); //Adds M100 laser on command after origin is set and befor offsets
 
-            convertList.Add("G93 X0.0Y0.0Z0.0");
+            convertList.Insert(4,$"G93 X{xOffset.ToString("0.0###")}Y{yOffset.ToString("0.0###")}");
             convertList.Add("/G130");  //append go home on end of list
             convertList.Add("/M707");  //append shuttle command on end
             convertList.Add("G50");  //append G50 on end
