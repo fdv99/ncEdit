@@ -33,6 +33,7 @@ namespace ncEdit
                     ncFileName = openFileDialog1.FileName;  //saves file path
                     original_code.Text = File.ReadAllText(ncFileName);  //displays original code in Text box
                     convertList = File.ReadAllLines(ncFileName).ToList();
+                    GetMaterial();
                 }
             }
         }
@@ -57,7 +58,7 @@ namespace ncEdit
             var offsetLocation = convertList.FindIndex(str => str.Contains("G93"));
             convertList.RemoveAt(offsetLocation);
 
-            int convertLength = convertList.Count;  //gets number of items in List
+            //int convertLength = convertList.Count;  //gets number of items in List
             convertList.RemoveAt(convertList.Count - 1);  //deletes last row of list (%)
             convertList.RemoveAt(convertList.Count - 1);  //deletes second last row of list (G50)
             convertList.RemoveAt(1);  // remove coordinate line
@@ -71,8 +72,9 @@ namespace ncEdit
 
         private void Btn_ConvertNC_Click(object sender, EventArgs e)
         {
-            GetMaterial();
             RemoveItems();
+            Console.WriteLine(convertList);
+            MaterialSize();
             Double.TryParse(txtBoxXOffset.Text, out xOffset);
             Double.TryParse(txtBoxYOffset.Text, out yOffset);
             
@@ -80,14 +82,13 @@ namespace ncEdit
             /// If there is a material designation, insert it into the begining
             if (material != "")
             {
-                convertList.Insert(1, material);  // insert material in beginning
+                convertList.Insert(2, material);  // insert material in beginning
             }
-            MaterialSize();
+            
+            convertList[3] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
+            convertList.Insert(4, "M100"); //Adds M100 laser on command after origin is set and befor offsets
 
-            convertList[2] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
-            convertList.Insert(3, "M100"); //Adds M100 laser on command after origin is set and befor offsets
-
-            convertList.Insert(4,$"G93 X{xOffset.ToString("0.0###")}Y{yOffset.ToString("0.0###")}");
+            convertList.Insert(5,$"G93 X{xOffset.ToString("0.0###")}Y{yOffset.ToString("0.0###")}");
             convertList.Add("/G130");  //append go home on end of list
             convertList.Add("/M707");  //append shuttle command on end
             convertList.Add("G50");  //append G50 on end
@@ -116,11 +117,10 @@ namespace ncEdit
 
         }
 
-        private string MaterialSize()
+        private void MaterialSize()
         {
             double xMax = 0.0;
             double yMax = 0.0;
-            List<string> xList = new List<string>();
             string xValue = "";
             string yValue = "";
 
@@ -129,19 +129,28 @@ namespace ncEdit
                 if (item.IndexOf('X') != -1)
                 {
                     int startX = item.IndexOf('X');
-                    startX = startX + 1;
+                    startX += 1;
                     xValue = item.Substring(startX, 5);
+                    if (Double.Parse(xValue) > xMax)
+                    {
+                        xMax = Double.Parse(xValue);
+                    }
+
                 }
                 if (item.IndexOf('Y') != -1)
                 {
                     int startY = item.IndexOf('Y');
-                    startY = startY + 1;
-                    xValue = item.Substring(startY, 5);
+                    startY += 1;
+                    yValue = item.Substring(startY, 4);
+                    if (Double.Parse(yValue) > yMax)
+                    {
+                        yMax = Double.Parse(yValue);
+                    }
                 }
-
-                Console.WriteLine($"{xValue}, {yValue}"); 
             }
-            return materialSize;
+            Console.WriteLine($"X{xMax.ToString()} Y{yValue.ToString()}");
+            materialSize = $"(WK/   0.000T {xMax.ToString()}X  {yValue.ToString()})";
+            convertList.Insert(1, materialSize);
         }
     }
 }
