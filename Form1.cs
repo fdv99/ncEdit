@@ -93,7 +93,6 @@ namespace ncEdit
             convertList.Add("G50");  //append G50 on end
 
             // To use E3 and E4, find G00 X0.0005 Y0.0005 and insert before or after
-            
 
             converted_code.Lines = convertList.ToArray();  //display new code in text box
 
