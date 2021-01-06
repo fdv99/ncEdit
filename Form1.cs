@@ -169,7 +169,13 @@ namespace ncEdit
                 }
             }
 
-            Console.WriteLine($"X{xMax} Y{yMax}");
+            xMax += 0.25;
+            yMax += 0.25;
+
+            if (xMax >= 120.0 | yMax >= 60.0)
+            {
+                MessageBox.Show($"Check Sheet Limits: X:{xMax} Y:{yMax}", "Warning!");
+            }
             materialSize = $"(WK/   0.000T {xMax}X  {yMax})";
             convertList.Insert(1, materialSize);
         }
