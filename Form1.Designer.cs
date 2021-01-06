@@ -57,7 +57,7 @@
             // 
             // Btn_OpenFile
             // 
-            this.Btn_OpenFile.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_OpenFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_OpenFile.Location = new System.Drawing.Point(12, 12);
             this.Btn_OpenFile.Name = "Btn_OpenFile";
             this.Btn_OpenFile.Size = new System.Drawing.Size(85, 23);
@@ -68,7 +68,7 @@
             // 
             // Btn_ConvertNC
             // 
-            this.Btn_ConvertNC.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_ConvertNC.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_ConvertNC.Location = new System.Drawing.Point(106, 12);
             this.Btn_ConvertNC.Name = "Btn_ConvertNC";
             this.Btn_ConvertNC.Size = new System.Drawing.Size(114, 23);
@@ -272,4 +272,3 @@
         private System.Windows.Forms.CheckBox chkOffset;
     }
 }
-

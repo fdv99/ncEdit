@@ -30,7 +30,7 @@ namespace ncEdit
             };
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if ((openFileDialog1.OpenFile()) !=null)
+                if ((openFileDialog1.OpenFile()) != null)
                 {
                     ncFileName = openFileDialog1.FileName;  //saves file path
                     original_code.Text = File.ReadAllText(ncFileName);  //displays original code in Text box
@@ -97,6 +97,7 @@ namespace ncEdit
 
             // To use E3 and E4, find G00 X0.0005 Y0.0005 and insert before or after
             
+
             converted_code.Lines = convertList.ToArray();  //display new code in text box
 
             string AddSuffix(string ncFileName, string suffix)
