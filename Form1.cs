@@ -57,13 +57,16 @@ namespace ncEdit
 
         private void RemoveItems()
         {
+            // Remove the G93 offset line
             var offsetLocation = convertList.FindIndex(str => str.Contains("G93"));
             convertList.RemoveAt(offsetLocation);
+
+            // Remove the G90 G92 line
+            convertList.RemoveAt(convertList.FindIndex(str => str.Contains("G92")));
 
             //int convertLength = convertList.Count;  //gets number of items in List
             convertList.RemoveAt(convertList.Count - 1);  //deletes last row of list (%)
             convertList.RemoveAt(convertList.Count - 1);  //deletes second last row of list (G50)
-            convertList.RemoveAt(1);  // remove coordinate line
 
             /// Remove M100 everywhere it might be
             while (convertList.Contains("M100"))
@@ -122,6 +125,9 @@ namespace ncEdit
 
         private void MaterialSize()
         {
+
+            // Bobcad files have varying coordinate lengths. Y0.6, X5.9757, Y21.5, Y38.0475
+            // How can we get 
             double xMax = 0.0;
             double yMax = 0.0;
             string xValue = "";
@@ -129,6 +135,24 @@ namespace ncEdit
 
             foreach (string item in convertList)
             {
+
+                string[] lineItems = item.Split(' ');
+                Console.WriteLine(lineItems);
+                
+                if (lineItems[1].Contains('X'))
+                {
+                    xValue = lineItems[1];
+                    xValue.Remove(0);
+
+                }
+                lineItems[1];
+                lineItems[2];
+                
+                
+                
+                
+                
+                /*
                 if (item.IndexOf('X') != -1)
                 {
                     int startX = item.IndexOf('X');
@@ -138,19 +162,21 @@ namespace ncEdit
                     {
                         xMax = Double.Parse(xValue);
                     }
-
                 }
+
                 if (item.IndexOf('Y') != -1)
                 {
                     int startY = item.IndexOf('Y');
                     startY += 1;
-                    yValue = item.Substring(startY, 4);
+                    int endLine = item.Length;
+                    yValue = item.Substring(startY, endLine-startY);
                     if (Double.Parse(yValue) > yMax)
                     {
                         yMax = Double.Parse(yValue);
                     }
-                }
+                }*/
             }
+
             Console.WriteLine($"X{xMax} Y{yValue}");
             materialSize = $"(WK/   0.000T {xMax}X  {yValue})";
             convertList.Insert(1, materialSize);
