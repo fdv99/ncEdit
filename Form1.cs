@@ -139,46 +139,38 @@ namespace ncEdit
                 string[] lineItems = item.Split(' ');
                 Console.WriteLine(lineItems);
                 
-                if (lineItems[1].Contains('X'))
+                if (lineItems.Length >= 3)
                 {
-                    xValue = lineItems[1];
-                    xValue.Remove(0);
-
-                }
-                lineItems[1];
-                lineItems[2];
-                
-                
-                
-                
-                
-                /*
-                if (item.IndexOf('X') != -1)
-                {
-                    int startX = item.IndexOf('X');
-                    startX += 1;
-                    xValue = item.Substring(startX, 5);
-                    if (Double.Parse(xValue) > xMax)
+                    if (lineItems[1].Contains('X'))
                     {
-                        xMax = Double.Parse(xValue);
+                        xValue = lineItems[1];
+
+                        // Remove the X from the start
+                        xValue = xValue.Substring(1);
+                        if (Double.Parse(xValue) > xMax)
+                        {
+                            xMax = Double.Parse(xValue);
+                        }
+
+                    }
+
+                    if (lineItems[2].Contains('Y'))
+                    {
+                        yValue = lineItems[2];
+
+                        // Remove the Y from the start
+                        yValue = yValue.Substring(1);
+                        if (Double.Parse(yValue) > yMax)
+                        {
+                            yMax = Double.Parse(yValue);
+                        }
+
                     }
                 }
-
-                if (item.IndexOf('Y') != -1)
-                {
-                    int startY = item.IndexOf('Y');
-                    startY += 1;
-                    int endLine = item.Length;
-                    yValue = item.Substring(startY, endLine-startY);
-                    if (Double.Parse(yValue) > yMax)
-                    {
-                        yMax = Double.Parse(yValue);
-                    }
-                }*/
             }
 
-            Console.WriteLine($"X{xMax} Y{yValue}");
-            materialSize = $"(WK/   0.000T {xMax}X  {yValue})";
+            Console.WriteLine($"X{xMax} Y{yMax}");
+            materialSize = $"(WK/   0.000T {xMax}X  {yMax})";
             convertList.Insert(1, materialSize);
         }
     }
