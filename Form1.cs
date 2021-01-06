@@ -40,18 +40,15 @@ namespace ncEdit
             }
         }
 
-
         public string GetMaterial()
         {
-            /// Get material condition if it is there
-
+            material = "";
             var materialLocation = convertList.FindIndex(str => str.Contains("M102"));
             if (materialLocation != -1)
             {
                 material = convertList[materialLocation];
                 convertList.RemoveAt(materialLocation);
             }
-
             return material;
         }
 
@@ -63,8 +60,6 @@ namespace ncEdit
 
             // Remove the G90 G92 line
             convertList.RemoveAt(convertList.FindIndex(str => str.Contains("G92")));
-
-            //int convertLength = convertList.Count;  //gets number of items in List
             convertList.RemoveAt(convertList.Count - 1);  //deletes last row of list (%)
             convertList.RemoveAt(convertList.Count - 1);  //deletes second last row of list (G50)
 
@@ -82,18 +77,17 @@ namespace ncEdit
             MaterialSize();
             Double.TryParse(txtBoxXOffset.Text, out xOffset);
             Double.TryParse(txtBoxYOffset.Text, out yOffset);
-            
+
+            convertList.Insert(2, $"G93 X{xOffset:0.0###}Y{yOffset:0.0###}");
+            convertList.Insert(2, "M100"); //Adds M100 laser on command after origin is set and befor offsets
+            convertList.Insert(2, "G90G92X120.8661Y61.0236Z3.937");  //changes from delta origin to F1 origin
 
             /// If there is a material designation, insert it into the begining
             if (material != "")
             {
                 convertList.Insert(2, material);  // insert material in beginning
             }
-            
-            convertList[3] = "G90G92X120.8661Y61.0236Z3.937";  //changes from delta origin to F1 origin
-            convertList.Insert(4, "M100"); //Adds M100 laser on command after origin is set and befor offsets
 
-            convertList.Insert(5, $"G93 X{xOffset:0.0###}Y{yOffset:0.0###}");
             convertList.Add("/G130");  //append go home on end of list
             convertList.Add("/M707");  //append shuttle command on end
             convertList.Add("G50");  //append G50 on end
