@@ -73,10 +73,14 @@ namespace ncEdit
         private void Btn_ConvertNC_Click(object sender, EventArgs e)
         {
             RemoveItems();
-            Console.WriteLine(convertList);
             MaterialSize();
             Double.TryParse(txtBoxXOffset.Text, out xOffset);
             Double.TryParse(txtBoxYOffset.Text, out yOffset);
+
+            // Add ending sequence
+            convertList.Add("/G130");  //append go home on end of list
+            convertList.Add("/M707");  //append shuttle command on end
+            convertList.Add("G50");  //append G50 on end
 
             convertList.Insert(2, $"G93 X{xOffset:0.0###}Y{yOffset:0.0###}");
             convertList.Insert(2, "M100"); //Adds M100 laser on command after origin is set and befor offsets
@@ -87,12 +91,6 @@ namespace ncEdit
             {
                 convertList.Insert(2, material);  // insert material in beginning
             }
-
-            convertList.Add("/G130");  //append go home on end of list
-            convertList.Add("/M707");  //append shuttle command on end
-            convertList.Add("G50");  //append G50 on end
-
-            // To use E3 and E4, find G00 X0.0005 Y0.0005 and insert before or after
 
             converted_code.Lines = convertList.ToArray();  //display new code in text box
 
@@ -118,14 +116,12 @@ namespace ncEdit
 
         private void MaterialSize()
         {
-
-            // Bobcad files have varying coordinate lengths. Y0.6, X5.9757, Y21.5, Y38.0475
-            // How can we get 
             double xMax = 0.0;
             double yMax = 0.0;
             string xValue = "";
             string yValue = "";
 
+            // Loop through the list of NC code
             foreach (string item in convertList)
             {
 
