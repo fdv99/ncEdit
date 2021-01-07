@@ -82,14 +82,14 @@ namespace ncEdit
             convertList.Add("/M707");  //append shuttle command on end
             convertList.Add("G50");  //append G50 on end
 
-            convertList.Insert(2, $"G93 X{xOffset:0.0###}Y{yOffset:0.0###}");
-            convertList.Insert(2, "M100"); //Adds M100 laser on command after origin is set and befor offsets
-            convertList.Insert(2, "G90G92X120.8661Y61.0236Z3.937");  //changes from delta origin to F1 origin
+            convertList.Insert(10, $"G93 X{xOffset:0.0###}Y{yOffset:0.0###}");
+            convertList.Insert(10, "M100"); //Adds M100 laser on command after origin is set and befor offsets
+            convertList.Insert(10, "G90G92X120.8661Y61.0236Z3.937");  //changes from delta origin to F1 origin
 
             /// If there is a material designation, insert it into the begining
             if (material != "")
             {
-                convertList.Insert(2, material);  // insert material in beginning
+                convertList.Insert(10, material);  // insert material in beginning
             }
 
             converted_code.Lines = convertList.ToArray();  //display new code in text box
@@ -166,7 +166,28 @@ namespace ncEdit
                 MessageBox.Show($"Check Sheet Limits: X:{xMax} Y:{yMax}", "Warning!");
             }
             materialSize = $"(WK/   0.000T {xMax}X  {yMax})";
+
+
+            // POSITION MATTERS
+            convertList.Insert(1, "(PZ/ 0.000X   0.000)");
+            convertList.Insert(1, "(CR/Y2009M08D10)");
+            convertList.Insert(1, "(TT/  H  M  S)");
+            convertList.Insert(1, "(CS/                       )");
+            convertList.Insert(1, "(CL/ 7.087   27.756   69.095   89.764)");
             convertList.Insert(1, materialSize);
+            convertList.Insert(1, "(MA/ CRS0.075)");
+            convertList.Insert(1, "(MN/ 237)");
+            convertList.Insert(1, "(MC/ F1 - 3015N    )");
+
+            /*
+            
+            (BP / 0.000X   0.000)
+            (LC / 0)
+            (LA / 0)
+            (WN / 0)
+            */
+
+
         }
     }
 }
