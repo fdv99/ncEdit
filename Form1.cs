@@ -94,23 +94,7 @@ namespace ncEdit
 
             converted_code.Lines = convertList.ToArray();  //display new code in text box
 
-            string AddSuffix(string ncFileName, string suffix)
-            {
-                string fDir = Path.GetDirectoryName(ncFileName);
-                string fName = Path.GetFileNameWithoutExtension(ncFileName);
-                string fExt = Path.GetExtension(ncFileName);
-                return Path.Combine(fDir, String.Concat(fName, suffix, fExt));
-            }
-
-            string newFileName = AddSuffix(ncFileName, String.Format("{0}", "F1")); //append (F1) to file name
-
-            TextWriter tw = new StreamWriter(newFileName);
-
-            foreach (String s in convertList)
-                tw.WriteLine(s);
-            tw.Close();
-            int fileSize = newFileName.Length;
-            tb_fileSize.Text = fileSize.ToString();
+            SaveNcFile(ncFileName);
 
         }
 
@@ -187,7 +171,27 @@ namespace ncEdit
             (WN / 0)
             */
 
+        }
 
+        private void SaveNcFile(string fileName)
+        {
+            string AddSuffix(string ncFileName, string suffix)
+            {
+                string fDir = Path.GetDirectoryName(fileName);
+                string fName = Path.GetFileNameWithoutExtension(fileName);
+                string fExt = Path.GetExtension(ncFileName);
+                return Path.Combine(fDir, String.Concat(fName, suffix, fExt));
+            }
+
+            string newFileName = AddSuffix(fileName, String.Format("{0}", "F1")); //append (F1) to file name
+
+            TextWriter tw = new StreamWriter(newFileName);
+
+            foreach (String s in convertList)
+                tw.WriteLine(s);
+            tw.Close();
+            int fileSize = newFileName.Length;
+            tb_fileSize.Text = fileSize.ToString();
         }
     }
 }
