@@ -147,9 +147,9 @@ namespace ncEdit
 
             if (xMax >= 120.0 | yMax >= 60.0)
             {
-                MessageBox.Show($"Check Sheet Limits: X:{xMax} Y:{yMax}", "Warning!");
+                MessageBox.Show($"Check Sheet Limits: X:{xMax:000.000} Y:{yMax:00.000}", "Warning!");
             }
-            materialSize = $"(WK/   0.000T {xMax}X  {yMax})";
+            materialSize = $"(WK/   0.000T  { xMax:000.000}X  { yMax:0.000})";
 
 
             // POSITION MATTERS
