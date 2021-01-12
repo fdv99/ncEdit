@@ -127,7 +127,7 @@ namespace ncEdit
 
                 string[] lineItems = item.Split(' ');
                 Console.WriteLine(lineItems);
-                
+
                 if (lineItems.Length >= 3)
                 {
                     if (lineItems[1].Contains('X'))
