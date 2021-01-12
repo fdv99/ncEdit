@@ -73,9 +73,10 @@ namespace ncEdit
         private void Btn_ConvertNC_Click(object sender, EventArgs e)
         {
             RemoveItems();
-            MaterialSize();
             Double.TryParse(txtBoxXOffset.Text, out xOffset);
             Double.TryParse(txtBoxYOffset.Text, out yOffset);
+            MaterialSize();
+
 
             // Add ending sequence
             convertList.Add("/G130");  //append go home on end of list
@@ -144,12 +145,14 @@ namespace ncEdit
 
             xMax += 0.25;
             yMax += 0.25;
+            xMax += xOffset;
+            yMax += yOffset;
 
             if (xMax >= 120.0 | yMax >= 60.0)
             {
-                MessageBox.Show($"Check Sheet Limits: X:{xMax:000.000} Y:{yMax:00.000}", "Warning!");
+                MessageBox.Show($"Check Sheet Limits: X:{xMax:0.000} Y:{yMax:0.000}", "Warning!");
             }
-            materialSize = $"(WK/   0.000T  { xMax:000.000}X  { yMax:0.000})";
+            materialSize = $"(WK/   0.000T  { xMax:0.000}X  { yMax:0.000})";
 
 
             // POSITION MATTERS
@@ -161,15 +164,9 @@ namespace ncEdit
             convertList.Insert(1, materialSize);
             convertList.Insert(1, "(MA/ CRS0.075)");
             convertList.Insert(1, "(MN/ 237)");
-            convertList.Insert(1, "(MC/ F1 - 3015N    )");
+            convertList.Insert(1, "(MC/ F1 - 3015NT   )");
 
-            /*
-            
-            (BP / 0.000X   0.000)
-            (LC / 0)
-            (LA / 0)
-            (WN / 0)
-            */
+
 
         }
 
