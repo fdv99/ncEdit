@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace ncEdit
 {
-    public partial class Form1 : Form
+    public partial class NcEdit : Form
     {
 
         private string ncFileName = string.Empty;
@@ -16,7 +16,7 @@ namespace ncEdit
         double yOffset = 0.0;
         string materialSize = "";
 
-        public Form1()
+        public NcEdit()
         {
             InitializeComponent();
         }

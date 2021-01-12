@@ -1,6 +1,6 @@
 ﻿namespace ncEdit
 {
-    partial class Form1
+    partial class NcEdit
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NcEdit));
             this.Btn_OpenFile = new System.Windows.Forms.Button();
             this.Btn_ConvertNC = new System.Windows.Forms.Button();
             this.original_code = new System.Windows.Forms.RichTextBox();
