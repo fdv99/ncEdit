@@ -8,7 +8,6 @@ namespace ncEdit
 {
     public partial class NcEdit : Form
     {
-
         private string ncFileName = string.Empty;
         List<string> convertList = new List<string>();
         string material = "";
@@ -77,7 +76,6 @@ namespace ncEdit
             Double.TryParse(txtBoxYOffset.Text, out yOffset);
             MaterialSize();
 
-
             // Add ending sequence
             convertList.Add("/G130");  //append go home on end of list
             convertList.Add("/M707");  //append shuttle command on end
@@ -96,7 +94,6 @@ namespace ncEdit
             converted_code.Lines = convertList.ToArray();  //display new code in text box
 
             SaveNcFile(ncFileName);
-
         }
 
         private void MaterialSize()
@@ -109,9 +106,7 @@ namespace ncEdit
             // Loop through the list of NC code
             foreach (string item in convertList)
             {
-
                 string[] lineItems = item.Split(' ');
-                Console.WriteLine(lineItems);
 
                 if (lineItems.Length >= 3)
                 {
@@ -125,7 +120,6 @@ namespace ncEdit
                         {
                             xMax = Double.Parse(xValue);
                         }
-
                     }
 
                     if (lineItems[2].Contains('Y'))
@@ -138,7 +132,6 @@ namespace ncEdit
                         {
                             yMax = Double.Parse(yValue);
                         }
-
                     }
                 }
             }
@@ -154,7 +147,6 @@ namespace ncEdit
             }
             materialSize = $"(WK/   0.000T  { xMax:0.000}X  { yMax:0.000})";
 
-
             // POSITION MATTERS
             convertList.Insert(1, "(PZ/ 0.000X   0.000)");
             convertList.Insert(1, "(CR/Y2009M08D10)");
@@ -165,9 +157,6 @@ namespace ncEdit
             convertList.Insert(1, "(MA/ CRS0.075)");
             convertList.Insert(1, "(MN/ 237)");
             convertList.Insert(1, "(MC/ F1 - 3015NT   )");
-
-
-
         }
 
         private void SaveNcFile(string fileName)
