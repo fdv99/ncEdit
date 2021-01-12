@@ -33,6 +33,7 @@ namespace ncEdit
                 {
                     ncFileName = openFileDialog1.FileName;  //saves file path
                     original_code.Text = File.ReadAllText(ncFileName);  //displays original code in Text box
+                    convertList.Clear();
                     convertList = File.ReadAllLines(ncFileName).ToList();
                     GetMaterial();
                 }
@@ -74,7 +75,8 @@ namespace ncEdit
             RemoveItems();
             Double.TryParse(txtBoxXOffset.Text, out xOffset);
             Double.TryParse(txtBoxYOffset.Text, out yOffset);
-            MaterialSize();
+            GetMaterialSize();
+            PlaceComments(materialSize);
 
             // Add ending sequence
             convertList.Add("/G130");  //append go home on end of list
@@ -96,7 +98,7 @@ namespace ncEdit
             SaveNcFile(ncFileName);
         }
 
-        private void MaterialSize()
+        private void GetMaterialSize()
         {
             double xMax = 0.0;
             double yMax = 0.0;
@@ -134,18 +136,19 @@ namespace ncEdit
                 }
             }
 
-            xMax += 0.25;
-            yMax += 0.25;
-            xMax += xOffset;
-            yMax += yOffset;
+            xMax += xOffset + 0.25;
+            yMax += yOffset + 0.25;
 
             if (xMax >= 120.0 | yMax >= 60.0)
             {
-                MessageBox.Show($"Check Sheet Limits: X:{xMax:0.000} Y:{yMax:0.000}", "Warning!");
+                MessageBox.Show($"Check Sheet Limits: X:{xMax:0.00} Y:{yMax:0.00}", "Warning!");
             }
             materialSize = $"(WK/   0.000T  { xMax:0.000}X  { yMax:0.000})";
 
-            // POSITION MATTERS
+        }
+
+        private void PlaceComments(string materialSize)
+        {
             convertList.Insert(1, "(PZ/ 0.000X   0.000)");
             convertList.Insert(1, "(CR/Y2009M08D10)");
             convertList.Insert(1, "(TT/  H  M  S)");

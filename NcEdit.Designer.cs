@@ -225,7 +225,7 @@
             this.chkOffset.Text = "Include Offset";
             this.chkOffset.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // NcEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -235,7 +235,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(608, 712);
-            this.Name = "Form1";
+            this.Name = "NcEdit";
             this.Text = "   V6 NC Conversion";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
