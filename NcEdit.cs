@@ -100,8 +100,6 @@ namespace ncEdit
         {
             double xMax = 0.0;
             double yMax = 0.0;
-            string xValue = "";
-            string yValue = "";
 
             // Loop through the list of NC code
             foreach (string item in convertList)
@@ -112,7 +110,7 @@ namespace ncEdit
                 {
                     if (lineItems[1].Contains('X'))
                     {
-                        xValue = lineItems[1];
+                        string xValue = lineItems[1];
 
                         // Remove the X from the start
                         xValue = xValue.Substring(1);
@@ -124,7 +122,7 @@ namespace ncEdit
 
                     if (lineItems[2].Contains('Y'))
                     {
-                        yValue = lineItems[2];
+                        string yValue = lineItems[2];
 
                         // Remove the Y from the start
                         yValue = yValue.Substring(1);
