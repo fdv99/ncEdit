@@ -82,35 +82,19 @@ namespace ncEdit
             convertList.Add("/M707");  //append shuttle command on end
             convertList.Add("G50");  //append G50 on end
 
-            convertList.Insert(2, $"G93 X{xOffset:0.0###}Y{yOffset:0.0###}");
-            convertList.Insert(2, "M100"); //Adds M100 laser on command after origin is set and befor offsets
-            convertList.Insert(2, "G90G92X120.8661Y61.0236Z3.937");  //changes from delta origin to F1 origin
+            convertList.Insert(10, $"G93 X{xOffset:0.0###}Y{yOffset:0.0###}");
+            convertList.Insert(10, "M100"); //Adds M100 laser on command after origin is set and befor offsets
+            convertList.Insert(10, "G90G92X120.8661Y61.0236Z3.937");  //changes from delta origin to F1 origin
 
             /// If there is a material designation, insert it into the begining
             if (material != "")
             {
-                convertList.Insert(2, material);  // insert material in beginning
+                convertList.Insert(10, material);  // insert material in beginning
             }
 
             converted_code.Lines = convertList.ToArray();  //display new code in text box
 
-            string AddSuffix(string ncFileName, string suffix)
-            {
-                string fDir = Path.GetDirectoryName(ncFileName);
-                string fName = Path.GetFileNameWithoutExtension(ncFileName);
-                string fExt = Path.GetExtension(ncFileName);
-                return Path.Combine(fDir, String.Concat(fName, suffix, fExt));
-            }
-
-            string newFileName = AddSuffix(ncFileName, String.Format("{0}", "F1")); //append (F1) to file name
-
-            TextWriter tw = new StreamWriter(newFileName);
-
-            foreach (String s in convertList)
-                tw.WriteLine(s);
-            tw.Close();
-            int fileSize = newFileName.Length;
-            tb_fileSize.Text = fileSize.ToString();
+            SaveNcFile(ncFileName);
 
         }
 
@@ -163,10 +147,51 @@ namespace ncEdit
 
             if (xMax >= 120.0 | yMax >= 60.0)
             {
-                MessageBox.Show($"Check Sheet Limits: X:{xMax} Y:{yMax}", "Warning!");
+                MessageBox.Show($"Check Sheet Limits: X:{xMax:000.000} Y:{yMax:00.000}", "Warning!");
             }
-            materialSize = $"(WK/   0.000T {xMax}X  {yMax})";
+            materialSize = $"(WK/   0.000T  { xMax:000.000}X  { yMax:0.000})";
+
+
+            // POSITION MATTERS
+            convertList.Insert(1, "(PZ/ 0.000X   0.000)");
+            convertList.Insert(1, "(CR/Y2009M08D10)");
+            convertList.Insert(1, "(TT/  H  M  S)");
+            convertList.Insert(1, "(CS/                       )");
+            convertList.Insert(1, "(CL/ 7.087   27.756   69.095   89.764)");
             convertList.Insert(1, materialSize);
+            convertList.Insert(1, "(MA/ CRS0.075)");
+            convertList.Insert(1, "(MN/ 237)");
+            convertList.Insert(1, "(MC/ F1 - 3015N    )");
+
+            /*
+            
+            (BP / 0.000X   0.000)
+            (LC / 0)
+            (LA / 0)
+            (WN / 0)
+            */
+
+        }
+
+        private void SaveNcFile(string fileName)
+        {
+            string AddSuffix(string ncFileName, string suffix)
+            {
+                string fDir = Path.GetDirectoryName(fileName);
+                string fName = Path.GetFileNameWithoutExtension(fileName);
+                string fExt = Path.GetExtension(ncFileName);
+                return Path.Combine(fDir, String.Concat(fName, suffix, fExt));
+            }
+
+            string newFileName = AddSuffix(fileName, String.Format("{0}", "F1")); //append (F1) to file name
+
+            TextWriter tw = new StreamWriter(newFileName);
+
+            foreach (String s in convertList)
+                tw.WriteLine(s);
+            tw.Close();
+            int fileSize = newFileName.Length;
+            tb_fileSize.Text = fileSize.ToString();
         }
     }
 }
