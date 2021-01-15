@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddRemove.cs" />
     <Compile Include="MaterialData.cs" />
     <Compile Include="NcEdit.cs">
       <SubType>Form</SubType>
