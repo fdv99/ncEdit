@@ -32,9 +32,9 @@ namespace ncEdit
             convertList.Add("/M707");  //append shuttle command on end
             convertList.Add("G50");  //append G50 on end
 
-            convertList.Insert(10, $"G93 X{xOffset:0.0###}Y{yOffset:0.0###}");
-            convertList.Insert(10, "M100"); //Adds M100 laser on command after origin is set and befor offsets
-            convertList.Insert(10, "G90G92X120.8661Y61.0236Z3.937");  //changes from delta origin to F1 origin
+            convertList.Insert(1, $"G93 X{xOffset:0.0###}Y{yOffset:0.0###}");
+            convertList.Insert(1, "M100"); //Adds M100 laser on command after origin is set and befor offsets
+            convertList.Insert(1, "G90G92X120.8661Y61.0236Z3.937");  //changes from delta origin to F1 origin
         }
     }
 }

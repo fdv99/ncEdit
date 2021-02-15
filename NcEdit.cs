@@ -46,7 +46,7 @@ namespace ncEdit
             Double.TryParse(txtBoxXOffset.Text, out xOffset);
             Double.TryParse(txtBoxYOffset.Text, out yOffset);
             materialSize = MaterialData.GetMaterialSize(convertList, xOffset, yOffset);
-            PlaceComments(materialSize);
+            // PlaceComments(materialSize);
 
             // Add ending sequence
             AddRemove.AddItems(convertList, xOffset, yOffset);
@@ -54,7 +54,7 @@ namespace ncEdit
             /// If there is a material designation, insert it into the begining
             if (material != "")
             {
-                convertList.Insert(10, material);  // insert material in beginning
+                convertList.Insert(1, material);  // insert material in beginning
             }
 
             converted_code.Lines = convertList.ToArray();  //display new code in text box
